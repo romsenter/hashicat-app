@@ -179,11 +179,6 @@ resource "null_resource" "configure-cat-app" {
     }
   }
 
-module "azure-backup" {
-  source  = "ravensorb/azure-backup/azurerm"
-  version = "1.0.2"
-  resource_group_name = "${var.prefix}-public"
-}
   provisioner "remote-exec" {
     inline = [
       "sudo apt -y update",
@@ -205,4 +200,9 @@ module "azure-backup" {
       host     = azurerm_public_ip.catapp-pip.fqdn
     }
   }
+
+module "azure-backup" {
+  source  = "ravensorb/azure-backup/azurerm"
+  version = "1.0.2"
+  resource_group_name = "${var.prefix}-public"
 }
